@@ -1,0 +1,20 @@
+#For entering environment .\venv\Scripts\Activate.ps1
+
+#Utilities
+numpy
+pandas
+
+#face recognition
+scikit-learn
+dlib-bin==20.0.1
+git+https://github.com/ageitgey/face_recognition_models
+setuptools<70.0.0
+
+#Databases
+supabase
+bcrypt  #Hashing of password for safety
+
+segno #QR code
+pillow #Image preprocessing
+
+streamlit #Frontend library
