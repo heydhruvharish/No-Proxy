@@ -1,4 +1,5 @@
 #For entering environment .\venv\Scripts\Activate.ps1
+#RUN STREAM LIT streamlit run app.py --server.runOnSave true
 
 #Utilities
 numpy
