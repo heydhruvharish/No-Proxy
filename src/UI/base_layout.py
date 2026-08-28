@@ -75,7 +75,8 @@ def style_base_layout():
             }
                 
             h3, h4, p {
-                font-family: 'Outfit', sans-serif;    
+                font-family: 'Outfit', sans-serif !important;    
+                color:white !important;
             }
                 
 
@@ -86,6 +87,7 @@ def style_base_layout():
                 padding: 10px 20px !important;
                 border: none !important;
                 transition: transform 0.25s ease-in-out !important;
+                
                 }
 
             button[kind="secondary"]{
@@ -95,6 +97,7 @@ def style_base_layout():
                 padding: 10px 20px !important;
                 border: none !important;
                 transition: transform 0.25s ease-in-out !important;
+                
                 }
 
             button[kind="tertiary"]{

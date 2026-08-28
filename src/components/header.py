@@ -20,3 +20,20 @@ def header_home():
         """,
         unsafe_allow_html=True
     )
+    
+    
+def header_dashboard():
+    
+    
+    img_path = "ChatGPT Image Aug 23, 2026, 11_28_07 PM.png"
+    img_base64 = get_image_base64(img_path)
+    
+    st.markdown(
+        f"""
+        <div style="display:flex;align-items:center; justify-content:center ;gap:10px">
+            <img src="data:image/png;base64,{img_base64}" style="height: 95px; border-radius:10px" />
+            <h2 style="color:#5865F2 ">No <br/> Proxy</h2>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )

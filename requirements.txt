@@ -1,5 +1,6 @@
 #For entering environment .\venv\Scripts\Activate.ps1
 #RUN STREAM LIT streamlit run app.py --server.runOnSave true
+#a9nvvhw2ETiHUNge Database password
 
 #Utilities
 numpy
