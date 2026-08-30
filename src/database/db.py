@@ -1,6 +1,8 @@
 from src.database.config import supabase
 import bcrypt
 
+#FUNCTIONS FOR TEACHER LOGIN/REGISTER PAGE
+
 #Functions for registering in teacher page
 def hash_pass(pwd):
     return bcrypt.hashpw(pwd.encode(),bcrypt.gensalt()).decode()
@@ -36,3 +38,9 @@ def teacher_login(username,password):
             return teacher
         
     return None
+
+#FUNCTIONS FOR STUDENT PAGE
+def get_all_students():
+    response=supabase.table("students").select("*").execute()
+    
+    return response.data
