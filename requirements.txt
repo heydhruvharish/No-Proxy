@@ -20,3 +20,7 @@ segno #QR code
 pillow #Image preprocessing
 
 streamlit #Frontend library
+
+#Voice recognition
+librosa
+resemblyzer

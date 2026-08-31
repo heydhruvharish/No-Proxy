@@ -79,16 +79,18 @@ def refresh_trained_model():
     
     return bool(model_data)
 
-
+#It takes a classroom image, finds the faces, determines which registered students those faces belong to, and returns the students who were detected
 def predict_attendance(class_image_np):
     encodings=get_face_embeddings(class_image_np)
     
     detected_student={}
-    model_data=get_trained_model
+    model_data=get_trained_model()
     
+    #No trained model ,then prediction not possible
     if not model_data:
         return {},[],0
     
+    #Get the model and data that was used to train the model
     clf=model_data["clf"]
     X_train=model_data["X"]
     y_train=model_data["y"]
