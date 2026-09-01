@@ -18,7 +18,7 @@ def load_dlib_models():
     
     #convert a face into a 128-dimensional face embedding ,these numbers represent characteristics of that face thereby identifying the person
     facerec=dlib.face_recognition_model_v1(
-        face_recognition_models.face_recognition_model_location
+        face_recognition_models.face_recognition_model_location()
     )
     
     return detector,sp,facerec
@@ -88,7 +88,7 @@ def predict_attendance(class_image_np):
     
     #No trained model ,then prediction not possible
     if not model_data:
-        return {},[],0
+        return detected_student, [], len(encodings)
     
     #Get the model and data that was used to train the model
     clf=model_data["clf"]
@@ -115,4 +115,4 @@ def predict_attendance(class_image_np):
             detected_student[predicted_id]=True
             
         
-    return detected_student,all_students,len(encoding)
+    return detected_student,all_students,len(encodings)
