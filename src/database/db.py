@@ -39,6 +39,49 @@ def teacher_login(username,password):
         
     return None
 
+#Subject creation in tage page
+def create_subject(subject_code,name,section,teacher_id):
+    data={"subject_code":subject_code,"name":name,"section":section,"teacher_id":teacher_id}
+    
+    response=supabase.table("subjects").insert(data).execute()
+    return response.data
+
+def get_teacher_subjects(teacher_id):
+    response=supabase.table("subjects").select("*,subject_student(count),attendance_logs(timestamp)").eq("teacher_id",teacher_id).execute()
+    
+    
+    subjects=response.data #Different subjects with its ID,teacher ID,Number of students,name of sub & attendance logs
+    
+    for sub in subjects:
+        #Before
+        # {
+        # "subject_id": 1,
+        # "name": "DBMS",
+        # "subject_students": [{"count": 40}]
+        # }
+        sub["total_students"]=sub.get("subject_student",[{}])[0].get("count",0) if sub.get("subject_student") else 0
+        #AFTER
+        # {
+        # "subject_id": 1,
+        # "name": "DBMS",
+        # "subject_students": [{"count": 40}],
+        # "total_students": 40
+        # }
+        #This is done to make the data easier to use in Streamlit.
+        
+        #Get all attendance records for this subject.
+        attendance=sub.get("attendance_logs",[])
+        
+        #Count the number of unique attendance timestamps/sessions
+        unique_sessions = len(set(log["timestamp"] for log in attendance)) #Its assumed atleast 1 student attends the class
+        sub["total_classes"]=unique_sessions
+        
+        sub.pop("subject_student",None)
+        sub.pop("attendance_logs",None)
+        
+    return subjects
+    
+
 #FUNCTIONS FOR STUDENT PAGE
 def get_all_students():
     response=supabase.table("students").select("*").execute()
