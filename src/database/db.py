@@ -95,3 +95,27 @@ def create_student(new_name,face_embedding,voice_embedding=None):
     
     return response.data
     
+def enroll_student_to_subject(student_id,subject_id,):
+    data={"student_id":student_id,"subject_id":subject_id}
+    
+    response=supabase.table("subject_student").insert(data).execute() #Inserted data is returned in dictionary inside list
+    
+    return response.data 
+
+def unenroll_student_to_subject(student_id,subject_id,):
+    data={"student_id":student_id,"subject_id":subject_id}
+    
+    response=supabase.table("subject_student").delete().eq("student_id",student_id).eq("subject_id",subject_id).execute() #Inserted data is returned in dictionary inside list
+    
+    return response.data 
+
+def get_student_subjects(student_id):
+    response=supabase.table("subject_student").select("*,subjects(*)").eq("student_id",student_id).execute()
+    
+    return response.data
+
+def get_student_attendance(student_id):
+    #Pick the attendance of all the subjects the student was present or absent
+    response=supabase.table("attendance_logs").select("*,subjects(*)").eq("student_id",student_id).execute()
+    
+    return response.data

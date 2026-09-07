@@ -4,6 +4,7 @@ from src.components.header import header_dashboard
 from src.components.dialog_create_subject import create_subject_dialog
 from src.database.db import check_teacher_exists,create_teacher,get_teacher_subjects
 from src.components.subject_card import subject_card
+from src.components.dialog_share_subject import share_subject_dialog
 
 def teacher_screen():
     style_base_layout()
@@ -77,9 +78,11 @@ def teacher_tab_manage_subjects():
         if st.button("Create new subject",width="stretch"):
             create_subject_dialog(teacher_id)
             
-            
+    
+    
     #List all subjects
     subjects=get_teacher_subjects(teacher_id)
+    
     
     if subjects:
         for sub in subjects:
@@ -87,18 +90,18 @@ def teacher_tab_manage_subjects():
                 ("🧑‍🎓","Students",sub["total_students"]),
                 ("⏲️","Classes",sub["total_classes"])
             ]
-        def share_btn():
-            st.button(f"Share code : {sub["name"]}",key=f"share_{sub["subject_code"]}",icon=":material/share:")
-            # share_subject_dialog(sub["name"],sub["subject_code"])
-            # st.space()
-            
-        subject_card(
-            name=sub["name"],
-            code=sub["subject_code"],
-            section=sub["section"],
-            stats=stats,
-            footer_callback=share_btn
-        )
+            def share_btn():
+                if st.button(f"Share code : {sub["name"]}",key=f"share_{sub["subject_code"]}",icon=":material/share:"):
+                    share_subject_dialog(sub["name"],sub["subject_code"])
+                st.space()
+                
+            subject_card(
+                name=sub["name"],
+                code=sub["subject_code"],
+                section=sub["section"],
+                stats=stats,
+                footer_callback=share_btn
+            )
         
     else:
         st.info("No subject found ,create one")
