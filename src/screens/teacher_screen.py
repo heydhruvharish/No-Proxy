@@ -5,6 +5,7 @@ from src.components.dialog_create_subject import create_subject_dialog
 from src.database.db import check_teacher_exists,create_teacher,get_teacher_subjects
 from src.components.subject_card import subject_card
 from src.components.dialog_share_subject import share_subject_dialog
+from src.components.dialog_add_photo import add_photo_dialog
 
 def teacher_screen():
     style_base_layout()
@@ -66,7 +67,40 @@ def teacher_dashboard():
         teacher_tab_attendance_records()
     
 def teacher_tab_take_attendance():
+    teacher_id=st.session_state.teacher_data["teacher_id"]
     st.header("Take attendace")    
+    
+    if "attendance_image" not in st.session_state:
+        st.session_state["attendance_image"]=[]
+        
+    subjects=get_teacher_subjects(teacher_id)
+    
+    if not subjects:
+        st.warning("You have'nt created any subjects")
+        return
+    
+    #Creates a dictionary like this : {
+    # "DBMS-CS301": 1,
+    # "OS-CS302": 2
+    # }
+    
+    subject_options = {
+    f"{s['name']}-{s['subject_code']}": s['subject_id']
+    for s in subjects
+    }
+    
+    col1,col2=st.columns([3,1])
+    
+    with col1:
+        select_subject_label=st.selectbox("Select subject",options=list(subject_options.keys()))
+        
+    with col2:
+        if st.button("Add photo",type="primary",icon=":material/photo:",width="stretch"):
+            add_photo_dialog()
+            
+    selected_subject_id=subject_options[select_subject_label]
+    
+    st.divider()
     
 def teacher_tab_manage_subjects():
     teacher_id=st.session_state.teacher_data["teacher_id"]
