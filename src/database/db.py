@@ -80,7 +80,12 @@ def get_teacher_subjects(teacher_id):
         sub.pop("attendance_logs",None)
         
     return subjects
-    
+
+
+#Teacher taking attendance
+def create_attendance(logs):
+    response=supabase.table("attendance_logs").insert(logs).execute()
+    return response.data
 
 #FUNCTIONS FOR STUDENT PAGE
 def get_all_students():
