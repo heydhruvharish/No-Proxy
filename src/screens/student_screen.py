@@ -167,7 +167,7 @@ def student_screen():
                                 st.session_state.is_logged_in=True
                                 st.session_state.user_role="student"
                                 st.session_state.student_data=response_data[0]
-                                st.toast(f"Profile create ,Hi {student["name"]}!")            
+                                st.toast(f"Profile create ,Hi {new_name}!")            
                                 time.sleep(1)
                                 st.rerun()
                                 
