@@ -8,7 +8,7 @@ def get_image_base64(path):
 def header_home():
     
     
-    img_path = "ChatGPT Image Aug 23, 2026, 11_28_07 PM.png"
+    img_path = "logo.png"
     img_base64 = get_image_base64(img_path)
     
     st.markdown(
@@ -25,7 +25,7 @@ def header_home():
 def header_dashboard():
     
     
-    img_path = "ChatGPT Image Aug 23, 2026, 11_28_07 PM.png"
+    img_path = "logo.png"
     img_base64 = get_image_base64(img_path)
     
     st.markdown(

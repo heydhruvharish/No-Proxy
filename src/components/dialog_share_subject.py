@@ -4,7 +4,7 @@ import io
 
 @st.dialog("Share class link")
 def share_subject_dialog(subject_name,subject_code):
-    app_domain="http://localhost:8501"
+    app_domain="NoProxy-main.streamlit.app"
     join_url=f"{app_domain}/?join-code={subject_code}"
     
     
