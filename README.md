@@ -102,62 +102,6 @@ No-Proxy/
         └── base_layout.py     # Custom CSS and styling
 ```
 
-## Getting Started
-
-### Prerequisites
-
-- Python 3.10 or newer
-- A free [Supabase](https://supabase.com) project
-
-### Installation
-
-```bash
-git clone https://github.com/heydhruvharish/No-Proxy.git
-cd No-Proxy
-
-# Create and activate a virtual environment
-python -m venv venv
-# Windows (PowerShell)
-.\venv\Scripts\Activate.ps1
-# macOS / Linux
-source venv/bin/activate
-
-pip install -r requirements.txt
-```
-
-> **Note:** `dlib-bin` ships prebuilt wheels, so no C++ compiler is needed on most systems.
-
-### Configuration
-
-Create `.streamlit/secrets.toml` in the project root:
-
-```toml
-SUPABASE_URL = "https://your-project.supabase.co"
-SUPABASE_KEY = "your-anon-key"
-```
-
-This file is gitignored — never commit your keys.
-
-### Database schema
-
-Create these tables in Supabase:
-
-| Table | Columns |
-|---|---|
-| `teachers` | `teacher_id`, `username` (unique), `password` (bcrypt hash), `name` |
-| `students` | `student_id`, `name`, `face_embedding` (float array), `voice_embedding` (float array, nullable) |
-| `subjects` | `subject_id`, `subject_code` (unique), `name`, `section`, `teacher_id` → `teachers` |
-| `subject_student` | `student_id` → `students`, `subject_id` → `subjects` |
-| `attendance_logs` | `student_id`, `subject_id`, `timestamp`, `status` |
-
-### Run
-
-```bash
-streamlit run app.py --server.runOnSave true
-```
-
-The app opens at `http://localhost:8501`.
-
 ## Usage
 
 **Teacher**
@@ -179,17 +123,6 @@ The app opens at `http://localhost:8501`.
 - Large classrooms are better covered with several photos taken from different angles.
 - Voice attendance assumes students speak one at a time — heavy overlap reduces accuracy.
 - The SVM is retrained on every new registration, so registration is briefly slower as the student count grows.
-
-## Roadmap
-
-- [ ] Attendance export to CSV / Excel
-- [ ] Liveness detection to block photo-of-a-photo spoofing
-- [ ] Bulk student import for teachers
-- [ ] Attendance analytics and low-attendance alerts
-
-## License
-
-Add a license of your choice (MIT is a common default for projects like this).
 
 ---
 
